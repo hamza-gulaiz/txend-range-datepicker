@@ -20,13 +20,10 @@ const Footer = () => {
 
   return (
     <View
-      style={[styles.headerContainer, theme?.headerContainerStyle]}
+      style={[styles.footerContainer, theme?.footerContainerStyle]}
       accessibilityRole="header"
     >
-      <View style={styles.container}>
-
-        <Text style={[styles.text, theme?.headerTextStyle]}>Ends</Text>
-
+        <Text style={[styles.text, theme?.footerTextStyle]}>Ends</Text>
         {mode === 'datetime' && calendarView !== CalendarViews.year ? (
           <Pressable
             onPress={() =>
@@ -40,30 +37,26 @@ const Footer = () => {
             accessibilityLabel={time}
           >
             <View
-              style={[styles.textContainer, theme?.headerTextContainerStyle]}
+              style={[styles.textContainer, theme?.footerTextContainerStyle]}
             >
-              <Text style={[styles.text, theme?.headerTextStyle]}>{time}</Text>
+              <Text style={[styles.text, theme?.footerTextStyle]}>{time}</Text>
             </View>
           </Pressable>
         ) : null}
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    justifyContent: 'center',
-    marginTop:15,
+  footerContainer: {
+    marginTop:10,
+    height:55,
     borderTopWidth: 1,
     borderColor: 'rgba(84, 84, 88, 0.65)',
-  },
-  container: {
-    marginTop: 10,
-    flexDirection: 'row',
+    flexDirection:'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
   },
   selectorContainer: {
     flexDirection: 'row',
@@ -77,6 +70,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     paddingVertical: 5,
     borderRadius: 10,
+    height:40,
+    width:90
   },
   text: {
     fontWeight: 'bold',

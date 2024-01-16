@@ -27,8 +27,9 @@ interface PropTypes extends CalendarTheme, HeaderProps {
   minimumDate?: DateType;
   maximumDate?: DateType;
   firstDayOfWeek?: number;
-  onValueChange?: (to: DateType,from:DateType) => void;
+  onValueChange?: (to:DateType,from:DateType) => void;
   displayFullDays?: boolean;
+
 }
 
 const DateTimePicker = ({
@@ -42,6 +43,9 @@ const DateTimePicker = ({
   displayFullDays = false,
   headerButtonsPosition = 'around',
   headerContainerStyle,
+  footerTextContainerStyle,
+  footerContainerStyle,
+  footerTextStyle,
   headerTextContainerStyle,
   headerTextStyle,
   headerButtonStyle,
@@ -72,6 +76,9 @@ const DateTimePicker = ({
     headerButtonStyle,
     headerButtonColor,
     headerButtonSize,
+    footerTextContainerStyle,
+    footerContainerStyle,
+    footerTextStyle,
     dayContainerStyle,
     todayContainerStyle,
     todayTextStyle,

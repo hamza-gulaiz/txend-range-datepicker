@@ -28,6 +28,9 @@ export type CalendarTheme = {
   headerTextContainerStyle?: ViewStyle;
   headerTextStyle?: TextStyle;
   headerButtonStyle?: ViewStyle;
+  footerContainerStyle?: ViewStyle;
+  footerTextContainerStyle?: ViewStyle;
+  footerTextStyle?: TextStyle;
   headerButtonColor?: string;
   headerButtonSize?: number;
   dayContainerStyle?: ViewStyle;
@@ -48,11 +51,6 @@ export type HeaderProps = {
   buttonPrevIcon?: ReactNode;
   buttonNextIcon?: ReactNode;
 };
-export type FooterProps = {
-  buttonPrevIcon?: ReactNode;
-  buttonNextIcon?: ReactNode;
-};
-
 export interface IDayObject {
   text: string;
   day: number;

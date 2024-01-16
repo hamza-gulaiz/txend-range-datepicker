@@ -75,9 +75,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   wheelContainer: {
     flex: 1,
+
   },
   timePickerContainer: {
     flexDirection: 'row',
@@ -87,6 +89,7 @@ const styles = StyleSheet.create({
     height: CALENDAR_HEIGHT / 2,
   },
   timePickerText: {
+    color: 'white',
     fontSize: 24,
     fontWeight: 'bold',
   },
