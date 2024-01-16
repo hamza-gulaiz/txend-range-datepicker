@@ -34,7 +34,7 @@ const Wheel = ({
   containerStyle,
   textStyle,
   itemHeight,
-  selectedColor = 'black',
+  selectedColor = 'white',
   disabledColor = 'gray',
   wheelHeight,
   displayCount = 5,

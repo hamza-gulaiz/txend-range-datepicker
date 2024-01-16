@@ -42,6 +42,8 @@ const Calendar = ({ buttonPrevIcon, buttonNextIcon }: PropTypes) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    backgroundColor:'rgba(118, 118, 128, 0.24)',
+    borderRadius:13,
   },
   calendarContainer: {
     height: CALENDAR_HEIGHT,
