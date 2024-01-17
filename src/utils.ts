@@ -90,10 +90,11 @@ export const getYearRange = (year: number) => {
  * @returns parsed date object
  */
 export const getParsedDate = (date: DateType) => {
-  return {
+  const parsedDate = dayjs(date, { format: 'YYYY-MM-DD HH:mm' });
+    return {
     year: dayjs(date).year(),
     month: dayjs(date).month(),
-    hour: dayjs(date).hour(),
+    hour: Number(parsedDate.format('hh')),
     minute: dayjs(date).minute(),
   };
 };

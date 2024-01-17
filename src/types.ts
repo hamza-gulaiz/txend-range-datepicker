@@ -15,6 +15,7 @@ export type CalendarState = {
   selectedDateTo: DateType;
   currentDate: DateType; // used for latest state of calendar based on Month and Year
   currentYear: number; // used for pagination in YearSelector
+
 };
 
 export type CalendarAction = {

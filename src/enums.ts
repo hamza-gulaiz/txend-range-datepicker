@@ -14,3 +14,4 @@ export enum CalendarActionKind {
 }
 
 export const CALENDAR_HEIGHT = 280;
+export const CALENDAR_WIDTH = 400;

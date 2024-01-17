@@ -26,6 +26,7 @@ export interface CalendarContextType extends CalendarState {
 
 const CalendarContext = createContext({} as CalendarContextType);
 
+
 export const useCalendarContext = () => useContext(CalendarContext);
 
 export default CalendarContext;
