@@ -1,8 +1,8 @@
-![react-native-ui-datepicker](https://user-images.githubusercontent.com/7857656/227187674-93012672-495d-4955-b4d3-46c3d016684e.jpg)
+![txend-react-native-ui-datepicker](https://user-images.githubusercontent.com/7857656/227187674-93012672-495d-4955-b4d3-46c3d016684e.jpg)
 
 ---
 
-# react-native-ui-datepicker
+# txend-react-native-ui-datepicker
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/farhoudshapouran/react-native-ui-datepicker/blob/main/LICENSE)
 
@@ -15,19 +15,19 @@ DateTimePicker component for React Native that allows you to create a customizab
 ## Installation
 
 ```sh
-npm install react-native-ui-datepicker
+npm install txend-react-native-ui-datepicker
 ```
 
 Or
 
 ```sh
-yarn add react-native-ui-datepicker
+yarn add txend-react-native-ui-datepicker
 ```
 
 ## Usage
 
 ```js
-import DateTimePicker from 'react-native-ui-datepicker';
+import DateTimePicker from 'txend-react-native-ui-datepicker';
 import dayjs from 'dayjs';
 
 export default function App() {
