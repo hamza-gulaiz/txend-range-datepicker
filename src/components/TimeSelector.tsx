@@ -1,33 +1,25 @@
 import React,{useState} from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {  View, StyleSheet } from 'react-native';
 import { useCalendarContext } from '../CalendarContext';
-
 import { CALENDAR_HEIGHT } from '../enums';
-// import { getParsedDate, getDate, getFormated } from '../utils';
-
 import { PickerIOS } from '@react-native-picker/picker'
+import { getDate, getFormated } from '../utils';
 
-const hour_list = Array.from({ length: 12 }, (_, index) => ({ index: index + 1, value: index + 1 }));
-const minute_list = Array.from({ length: 60 }, (_, index) => ({ index: index + 1, value: index + 1 }));
+const hour_list = Array.from({ length: 11 }, (_, index) => ({ index: index + 1, value: index + 1 }));
+const minute_list = Array.from({ length: 59 }, (_, index) => ({ index: index + 1, value: index + 1 }));
 
 const TimeSelector = () => {
   const {
-    // selectedDateTo,
-    // selectedDate,
-    // currentDate,
-    // onSelectDateTo,
-    // onSelectDate,
-    theme,
+    selectedDateTo,
+    selectedDate,
+    currentDate,
+    onSelectDateTo,
+    onSelectDate,
+    // theme,
   } = useCalendarContext();
-  // const { hour, minute } = getParsedDate(
-  //   selectedDateTo ? selectedDateTo : selectedDate
-  // );
-
-  const [hours, setHours] = useState(1);
-  const [minutes, setMinutes] = useState(15);
-
+  const [hoursValue, setHoursValue] = useState(1);
+  const [minutesValue, setMinutesValue] = useState(15);
   
-
   return (
     <View style={styles.container} testID="time-selector">
       <View
@@ -35,11 +27,15 @@ const TimeSelector = () => {
       >
         <View style={styles.wheelContainer}>
         <PickerIOS
-          selectedValue={hours}
+          selectedValue={hoursValue}
           itemStyle={styles.itemPickerStyle}
      
           onValueChange={(value: any) => {
-            setHours(value)
+            setHoursValue(value)
+            const newDate = getDate(selectedDate ? selectedDate : currentDate).hour(value);
+            const newDateTo = getDate(selectedDateTo ? selectedDateTo : currentDate).hour(value);
+            onSelectDate(getFormated(newDate));
+            onSelectDateTo(getFormated(newDateTo), selectedDate);
           }}
         >
             {hour_list.map((item,index)=>(
@@ -49,10 +45,14 @@ const TimeSelector = () => {
         </View>
         <View style={styles.wheelContainer} />
         <PickerIOS
-          selectedValue={minutes}
+          selectedValue={minutesValue}
           itemStyle={styles.itemPickerStyle}
           onValueChange={(value: any) => {
-            setMinutes(value)
+            setMinutesValue(value)
+            const newDate = getDate(selectedDate ? selectedDate : currentDate).minute(value);
+            const newDateTo = getDate(selectedDateTo ? selectedDateTo : currentDate).minute(value);
+            onSelectDateTo(getFormated(newDateTo), selectedDate);
+            onSelectDate(getFormated(newDate));
           }}
         >
         {minute_list.map((item,index)=>(

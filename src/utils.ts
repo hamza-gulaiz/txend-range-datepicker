@@ -37,9 +37,9 @@ export function formatTimeWithAmPm(
   );
   const hour = parseInt(formattedHour, 10);
   if (hour >= 12) {
-    return `${formattedTime} PM`;
+    return `${formattedTime}`;
   } else {
-    return `${formattedTime} AM`;
+    return `${formattedTime}`;
   }
 }
 
