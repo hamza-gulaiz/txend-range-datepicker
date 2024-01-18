@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
-import { View, Text, Pressable, StyleSheet} from 'react-native';
+import { View, Text, Pressable, StyleSheet,Image} from 'react-native';
 import { useCalendarContext } from '../CalendarContext';
 import dayjs from 'dayjs';
 import { CalendarViews } from '../enums';
 import type { HeaderProps } from '../types';
 import { getDateYear, getYearRange, YEAR_PAGE_SIZE } from '../utils';
-import { NEXT_ICON, PREVIOUS_ICON } from '../assets/svgs/svg';
+
 
 
 const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
@@ -41,19 +41,14 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
         style={[styles.iconContainer, styles.prev, theme?.headerButtonStyle]}
       >
         {buttonPrevIcon || (
-          <PREVIOUS_ICON 
-          width= {theme?.headerButtonSize || 18}
-          height= {theme?.headerButtonSize || 18}
-          fill= {theme?.headerButtonColor}
+          <Image
+            source={{uri:'https://pendulum-image.s3.amazonaws.com/left.png'}}
+            style={{
+              width: theme?.headerButtonSize || 18,
+              height: theme?.headerButtonSize || 18,
+              tintColor: theme?.headerButtonColor || 'white',
+            }}
           />
-          // <Image
-          //   source={require('../assets/images/arrow_left.png')}
-          //   style={{
-          //     width: theme?.headerButtonSize || 18,
-          //     height: theme?.headerButtonSize || 18,
-          //     tintColor: theme?.headerButtonColor,
-          //   }}
-          // />
         )}
       </View>
     </Pressable>
@@ -78,19 +73,14 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
         style={[styles.iconContainer, styles.next, theme?.headerButtonStyle]}
       >
         {buttonNextIcon || (
-          <NEXT_ICON 
-          width= {theme?.headerButtonSize || 18}
-          height= {theme?.headerButtonSize || 18}
-          fill= {theme?.headerButtonColor}
+          <Image
+            source={{uri: "https://pendulum-image.s3.amazonaws.com/Right.png"}}
+            style={{
+              width: theme?.headerButtonSize || 18,
+              height: theme?.headerButtonSize || 18,
+              tintColor: theme?.headerButtonColor || 'white',
+            }}
           />
-          // <Image
-          //   source={}
-          //   style={{
-          //     width: theme?.headerButtonSize || 18,
-          //     height: theme?.headerButtonSize || 18,
-          //     tintColor: theme?.headerButtonColor,
-          //   }}
-          // />
         )}
       </View>
     </Pressable>
@@ -121,10 +111,13 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
             </Text>
           </View>
         </Pressable>
-        <NEXT_ICON 
-          width= {theme?.headerButtonSize || 18}
-          height= {theme?.headerButtonSize || 18}
-          fill= {theme?.headerButtonColor}
+        <Image
+            source={{uri: "https://pendulum-image.s3.amazonaws.com/Right.png"}}
+            style={{
+              width: theme?.headerButtonSize || 18,
+              height: theme?.headerButtonSize || 18,
+              tintColor: theme?.headerButtonColor || 'white',
+            }}
           />
       </>
     );
