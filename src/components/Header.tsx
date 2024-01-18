@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react';
-import { View, Text, Pressable, StyleSheet, Image } from 'react-native';
+import { View, Text, Pressable, StyleSheet} from 'react-native';
 import { useCalendarContext } from '../CalendarContext';
 import dayjs from 'dayjs';
 import { CalendarViews } from '../enums';
 import type { HeaderProps } from '../types';
 import { getDateYear, getYearRange, YEAR_PAGE_SIZE } from '../utils';
+import { NEXT_ICON, PREVIOUS_ICON } from '../assets/svgs/svg';
 
-const arrow_left = require('../assets/images/arrow_left.png');
-const arrow_right = require('../assets/images/arrow_right.png');
 
 const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
   const {
@@ -42,14 +41,19 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
         style={[styles.iconContainer, styles.prev, theme?.headerButtonStyle]}
       >
         {buttonPrevIcon || (
-          <Image
-            source={arrow_left}
-            style={{
-              width: theme?.headerButtonSize || 18,
-              height: theme?.headerButtonSize || 18,
-              tintColor: theme?.headerButtonColor,
-            }}
+          <PREVIOUS_ICON 
+          width= {theme?.headerButtonSize || 18}
+          height= {theme?.headerButtonSize || 18}
+          fill= {theme?.headerButtonColor}
           />
+          // <Image
+          //   source={require('../assets/images/arrow_left.png')}
+          //   style={{
+          //     width: theme?.headerButtonSize || 18,
+          //     height: theme?.headerButtonSize || 18,
+          //     tintColor: theme?.headerButtonColor,
+          //   }}
+          // />
         )}
       </View>
     </Pressable>
@@ -74,14 +78,19 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
         style={[styles.iconContainer, styles.next, theme?.headerButtonStyle]}
       >
         {buttonNextIcon || (
-          <Image
-            source={arrow_right}
-            style={{
-              width: theme?.headerButtonSize || 18,
-              height: theme?.headerButtonSize || 18,
-              tintColor: theme?.headerButtonColor,
-            }}
+          <NEXT_ICON 
+          width= {theme?.headerButtonSize || 18}
+          height= {theme?.headerButtonSize || 18}
+          fill= {theme?.headerButtonColor}
           />
+          // <Image
+          //   source={}
+          //   style={{
+          //     width: theme?.headerButtonSize || 18,
+          //     height: theme?.headerButtonSize || 18,
+          //     tintColor: theme?.headerButtonColor,
+          //   }}
+          // />
         )}
       </View>
     </Pressable>
@@ -112,14 +121,11 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
             </Text>
           </View>
         </Pressable>
-        <Image
-          source={arrow_right}
-          style={{
-            width: theme?.headerButtonSize || 18,
-            height: theme?.headerButtonSize || 18,
-            tintColor: theme?.headerButtonColor,
-          }}
-        />
+        <NEXT_ICON 
+          width= {theme?.headerButtonSize || 18}
+          height= {theme?.headerButtonSize || 18}
+          fill= {theme?.headerButtonColor}
+          />
       </>
     );
   }, [

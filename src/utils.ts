@@ -30,7 +30,7 @@ export function formatTimeWithAmPm(
 
   
   const formattedTime = dayjs(time != null? time : getFormated(new Date())).format(
-    'HH:mm'
+    'hh:mm'
     );
   const formattedHour = dayjs(time ? time : getFormated(new Date())).format(
     'HH'
