@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { CalendarViews } from '../enums';
 import type { HeaderProps } from '../types';
 import { getDateYear, getYearRange, YEAR_PAGE_SIZE } from '../utils';
-
+import { LEFT_ICON,RIGHT_ICON } from '../constants/imageBase64';
 
 
 const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
@@ -42,7 +42,7 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
       >
         {buttonPrevIcon || (
           <Image
-            source={{uri:'https://pendulum-image.s3.amazonaws.com/left.png'}}
+            source={{uri:LEFT_ICON}}
             style={{
               width: theme?.headerButtonSize || 18,
               height: theme?.headerButtonSize || 18,
@@ -74,7 +74,7 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
       >
         {buttonNextIcon || (
           <Image
-            source={{uri: "https://pendulum-image.s3.amazonaws.com/Right.png"}}
+            source={{uri: RIGHT_ICON}}
             style={{
               width: theme?.headerButtonSize || 18,
               height: theme?.headerButtonSize || 18,
@@ -112,7 +112,7 @@ const Header = ({ buttonPrevIcon, buttonNextIcon }: HeaderProps) => {
           </View>
         </Pressable>
         <Image
-            source={{uri: "https://pendulum-image.s3.amazonaws.com/Right.png"}}
+            source={{uri: RIGHT_ICON}}
             style={{
               width: theme?.headerButtonSize || 18,
               height: theme?.headerButtonSize || 18,
