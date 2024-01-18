@@ -134,25 +134,6 @@ const DateTimePicker = ({
     }
   );
 
-  // useEffect(() => {
-  //   dispatch({
-  //     type: CalendarActionKind.CHANGE_SELECTED_DATE,
-  //     payload:  twoDaysAgo,
-  //   });
-  //   dispatch({
-  //     type: CalendarActionKind.CHANGE_SELECTED_DATE_TO,
-  //     payload: today,
-  //   });
-  //   dispatch({
-  //     type: CalendarActionKind.CHANGE_CURRENT_DATE,
-  //     payload: value ? getFormated(value) : new Date(),
-  //   });
-  //   dispatch({
-  //     type: CalendarActionKind.CHANGE_CURRENT_YEAR,
-  //     payload: getDateYear(value),
-  //   });
-  // }, [value]);
-
   useEffect(() => {
     dispatch({
       type: CalendarActionKind.SET_CALENDAR_VIEW,

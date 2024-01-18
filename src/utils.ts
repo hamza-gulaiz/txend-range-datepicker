@@ -36,13 +36,32 @@ export function formatTimeWithAmPm(
     'HH'
   );
   const hour = parseInt(formattedHour, 10);
-  if (hour >= 12) {
-    return `${formattedTime}`;
-  } else {
-    return `${formattedTime}`;
-  }
+  const period = hour >= 12 ? 'PM' : 'AM';
+  return {
+    formattedTime: formattedTime,
+    period: period,
+  };
+  // if (hour >= 12) {
+  //   return `${formattedTime} PM`;
+  // } else {
+  //   return `${formattedTime} AM`;
+  // }
+}
+export function formatTime(timestamp: number | Date) {
+  const formattedTime = dayjs(timestamp).format('hh:mm');
+  // const formattedHour = dayjs(timestamp).format('H');
+  // const hour = parseInt(formattedHour, 10);
+  // const period = hour >= 12 ? 'PM' : 'AM';
+  return formattedTime;
 }
 
+export function timeInNumber(timeString: string) {
+  const parsedTime = dayjs(timeString, { format: 'hh:mm' });
+
+  const hour = parsedTime.hour();
+  const minutes = parsedTime.minute();
+  return { hour, minutes };
+}
 export function getDateWithOffset(offset: number) {
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + offset);

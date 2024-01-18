@@ -24,9 +24,9 @@ const DaySelector = () => {
     firstDayOfWeek,
     theme,
   } = useCalendarContext();
-  const { year, month, hour, minute } = getParsedDate(currentDate);
+  const { year, month,hour,minute } = getParsedDate(new Date());
 
-  const daysGrid = useMemo(
+ const daysGrid = useMemo(
     () => {
       const today = new Date();
       return getMonthDays(
@@ -83,7 +83,7 @@ const DaySelector = () => {
       } else {
       }
     },
-    [onSelectDate, onSelectDateTo, hour, minute, selectedDate, selectedDateTo]
+    [onSelectDate, onSelectDateTo, hour,minute, selectedDate, selectedDateTo]
   );
 
 

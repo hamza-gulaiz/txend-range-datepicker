@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useCalendarContext } from '../CalendarContext';
 import { CalendarViews } from '../enums';
 import { formatTimeWithAmPm } from '../utils';
+
 
 const Footer = () => {
   const {
@@ -14,12 +15,10 @@ const Footer = () => {
     theme,
   } = useCalendarContext();
 
-  const time = formatTimeWithAmPm(
+
+  const {formattedTime,period} = formatTimeWithAmPm(
     selectedDateTo ? selectedDateTo : selectedDate
   );
-
-  const [period,setPeriod] = useState(true)
-
   return (
     <View
       style={[styles.footerContainer, theme?.footerContainerStyle]}
@@ -27,7 +26,6 @@ const Footer = () => {
     >
         <Text style={[styles.text, theme?.footerTextStyle]}>Ends</Text>
         <View style={styles.timeContainer}>
-
         {mode === 'datetime' && calendarView !== CalendarViews.year ? (
           <Pressable
             onPress={() =>
@@ -36,33 +34,36 @@ const Footer = () => {
                   ? CalendarViews.day
                   : CalendarViews.time
               )
-          
             }
             accessibilityRole="button"
-            accessibilityLabel={time}
+            accessibilityLabel={formattedTime}
           >
             <View
               style={[styles.textContainer, theme?.footerTextContainerStyle]}
               >
-              <Text style={[styles.text, theme?.footerTextStyle]}>{time}</Text>
+              <Text style={[styles.text, theme?.footerTextStyle]}>{formattedTime}</Text>
             </View>
           </Pressable>
         ) : null}
            {mode === 'datetime' && calendarView !== CalendarViews.year ? (
           <Pressable
             onPress={() =>
-              setPeriod((prevState) => !prevState)
+              setCalendarView(
+                calendarView === CalendarViews.time
+                  ? CalendarViews.day
+                  : CalendarViews.time
+              )
             }
             accessibilityRole="button"
-            accessibilityLabel={time}
+            accessibilityLabel={formattedTime}
           >
             <View
               style={[styles.periodTextContainer, theme?.footerTextContainerStyle]}
               >
-                <View style={ period ?  styles.periodActiveCardContainer :styles.periodInactiveCardContainer}>
+                <View style={ period === "AM"?  styles.periodActiveCardContainer :styles.periodInactiveCardContainer}>
               <Text style={[styles.text, theme?.footerTextStyle]}>AM</Text>
                 </View>
-                <View style={ period ?  styles.periodInactiveCardContainer :styles.periodActiveCardContainer}>
+                <View style={ period === "AM" ?  styles.periodInactiveCardContainer :styles.periodActiveCardContainer}>
               <Text style={[styles.text, theme?.footerTextStyle]}>PM</Text>
                 </View>
             </View>
