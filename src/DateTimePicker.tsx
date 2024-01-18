@@ -30,6 +30,7 @@ interface PropTypes extends CalendarTheme, HeaderProps {
   onValueChange?: (to:DateType,from:DateType) => void;
   displayFullDays?: boolean;
 
+
 }
 
 const DateTimePicker = ({
@@ -69,6 +70,7 @@ const DateTimePicker = ({
   dayjs.locale(locale);
 
   const theme = {
+
     headerButtonsPosition,
     headerContainerStyle,
     headerTextContainerStyle,

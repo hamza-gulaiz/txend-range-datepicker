@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import DateTimePicker,{DateType} from "txend-react-native-ui-datepicker";
-import { StyleSheet} from 'react-native';
+import { StyleSheet,  View} from 'react-native';
 
 export default function App() {
   
   const [value, setValue] = useState<DateType>(dayjs());
   return (
+
+    <View style={{padding:20,marginTop:30,backgroundColor:'black'}}>
+
             <DateTimePicker
               //minimumDate={dayjs().startOf('day')}
               //maximumDate={dayjs().add(3, 'day').endOf('day')}
@@ -31,8 +34,9 @@ export default function App() {
                 console.log('date range', to,from);
                 setValue(from)
               }}
-           
+              
               />
+              </View>
    
   );
 }

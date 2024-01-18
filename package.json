@@ -1,6 +1,6 @@
 {
   "name": "txend-react-native-ui-datepicker",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Customizable multi-date range datetime picker for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -169,6 +169,7 @@
     ]
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.6.1",
     "uninstall": "^0.0.0"
   }
 }

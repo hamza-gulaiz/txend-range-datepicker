@@ -16,7 +16,7 @@ const CalendarView: Record<CalendarViews, ReactNode> = {
   month: <MonthSelector />,
   day: <DaySelector />,
   time: <TimeSelector />,
-};
+}; 
 
 interface PropTypes extends HeaderProps {}
 

@@ -1,201 +1,87 @@
-import {
-  Animated,
-  PanResponder,
-  StyleSheet,
-  TextStyle,
-  View,
-  ViewStyle,
-  Platform,
-} from 'react-native';
-import React, { memo, useMemo, useRef } from 'react';
-import { sin } from './AnimatedMath';
-import { CALENDAR_HEIGHT } from '../../enums';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Picker } from '@react-native-picker/picker'
 
-export interface WheelStyleProps {
-  containerStyle?: ViewStyle;
-  itemHeight?: number;
-  selectedColor?: string;
-  disabledColor?: string;
-  textStyle?: TextStyle;
-  wheelHeight?: number;
-  displayCount?: number;
-}
 
-export interface WheelProps extends WheelStyleProps {
-  value: number;
-  setValue: (value: number) => void;
-  items: number[];
-}
+const TimerPicker = () => {
+  const [hours, setHours] = useState('0');
+  const [minutes, setMinutes] = useState('0');
+  // const [seconds, setSeconds] = useState('0');
 
-const Wheel = ({
-  value,
-  setValue,
-  items,
-  containerStyle,
-  textStyle,
-  itemHeight,
-  selectedColor = 'white',
-  disabledColor = 'gray',
-  wheelHeight,
-  displayCount = 5,
-}: WheelProps) => {
-  const translateY = useRef(new Animated.Value(0)).current;
-  const renderCount =
-    displayCount * 2 < items.length
-      ? displayCount * 4 + 1
-      : displayCount * 2 - 1;
-  const circular = items.length >= displayCount;
-  const height =
-    typeof containerStyle?.height === 'number' ? containerStyle.height : 130;
-  const radius = wheelHeight != null ? wheelHeight / 2 : height / 2;
+  const handleHoursChange = (value: React.SetStateAction<string>) => {
+    setHours(value);
+  };
 
-  const valueIndex = items.indexOf(value);
+  const handleMinutesChange = (value: React.SetStateAction<string>) => {
+    setMinutes(value);
+  };
 
-  const panResponder = useMemo(() => {
-    return PanResponder.create({
-      onMoveShouldSetPanResponder: () => true,
-      onStartShouldSetPanResponderCapture: () => true,
-      onPanResponderGrant: () => {
-        translateY.setValue(0);
-      },
-      onPanResponderMove: (evt, gestureState) => {
-        translateY.setValue(gestureState.dy);
-        evt.stopPropagation();
-      },
-      onPanResponderRelease: (_, gestureState) => {
-        translateY.extractOffset();
-        let newValueIndex =
-          valueIndex -
-          Math.round(gestureState.dy / ((radius * 2) / displayCount));
-        if (circular)
-          newValueIndex = (newValueIndex + items.length) % items.length;
-        else {
-          if (newValueIndex < 0) newValueIndex = 0;
-          else if (newValueIndex >= items.length)
-            newValueIndex = items.length - 1;
-        }
-        const newValue = items[newValueIndex] || 0;
-        if (newValue === value) {
-          translateY.setOffset(0);
-          translateY.setValue(0);
-        } else setValue(newValue);
-      },
-    });
-  }, [
-    circular,
-    displayCount,
-    radius,
-    setValue,
-    value,
-    valueIndex,
-    items,
-    translateY,
-  ]);
-
-  const displayValues = useMemo(() => {
-    const centerIndex = Math.floor(renderCount / 2);
-
-    return Array.from({ length: renderCount }, (_, index) => {
-      let targetIndex = valueIndex + index - centerIndex;
-      if (targetIndex < 0 || targetIndex >= items.length) {
-        targetIndex = (targetIndex + items.length) % items.length;
-      }
-      return items[targetIndex] || 0;
-    });
-  }, [renderCount, valueIndex, items]);
-
-  const animatedAngles = useMemo(() => {
-    //translateY.setValue(0);
-    translateY.setOffset(0);
-    const currentIndex = displayValues.indexOf(value);
-    return displayValues && displayValues.length > 0
-      ? displayValues.map((_, index) =>
-          translateY
-            .interpolate({
-              inputRange: [-radius, radius],
-              outputRange: [
-                -radius +
-                  ((radius * 2) / displayCount) * (index - currentIndex),
-                radius + ((radius * 2) / displayCount) * (index - currentIndex),
-              ],
-              extrapolate: 'extend',
-            })
-            .interpolate({
-              inputRange: [-radius, radius],
-              outputRange: [-Math.PI / 2, Math.PI / 2],
-              extrapolate: 'clamp',
-            })
-        )
-      : [];
-  }, [displayValues, radius, value, displayCount, translateY]);
+  // const handleSecondsChange = (value: React.SetStateAction<string>) => {
+  //   setSeconds(value);
+  // };
 
   return (
-    <View
-      style={[styles.container, containerStyle]}
-      {...panResponder.panHandlers}
-    >
-      {displayValues?.map((displayValue, index) => {
-        const animatedAngle = animatedAngles[index];
-        return (
-          <Animated.Text
-            key={`${value}${
-              index > displayValues.length / 2 ? 'Post' : 'Before'
-            }${displayValue + index}`}
-            style={[
-              textStyle,
-              // eslint-disable-next-line react-native/no-inline-styles
-              {
-                position: 'absolute',
-                height: itemHeight,
-                transform: animatedAngle
-                  ? [
-                      {
-                        translateY: Animated.multiply(
-                          radius,
-                          sin(animatedAngle)
-                        ),
-                      },
-                      {
-                        rotateX: animatedAngle.interpolate({
-                          inputRange: [-Math.PI / 2, Math.PI / 2],
-                          outputRange: ['-89deg', '89deg'],
-                          extrapolate: 'clamp',
-                        }),
-                      },
-                    ]
-                  : [],
-                color: displayValue === value ? selectedColor : disabledColor,
-              },
-            ]}
-          >
-            {typeof displayValue === 'number' && displayValue < 10
-              ? `0${displayValue}`
-              : `${displayValue}`}
-          </Animated.Text>
-        );
-      })}
+    <View style={styles.container}>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={hours}
+          onValueChange={handleHoursChange}
+          style={styles.picker}
+        >
+          {[...Array(12).keys()].map((hour) => (
+            <Picker.Item key={hour} label={`${hour}`} value={`${hour}`} />
+          ))}
+        </Picker>
+        <Text style={styles.label}>Hours</Text>
+      </View>
+
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={minutes}
+          onValueChange={handleMinutesChange}
+          style={styles.picker}
+        >
+          {[...Array(60).keys()].map((minute) => (
+            <Picker.Item key={minute} label={`${minute}`} value={`${minute}`} />
+          ))}
+        </Picker>
+        <Text style={styles.label}>Minutes</Text>
+      </View>
+
+      {/* <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={seconds}
+          onValueChange={handleSecondsChange}
+          style={styles.picker}
+        >
+          {[...Array(60).keys()].map((second) => (
+            <Picker.Item key={second} label={`${second}`} value={`${second}`} />
+          ))}
+        </Picker>
+        <Text style={styles.label}>Seconds</Text>
+      </View> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    minWidth: 30,
-    overflow: 'hidden',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    justifyContent: 'center',
-    height: CALENDAR_HEIGHT / 2,
-    ...Platform.select({
-      web: {
-        cursor: 'pointer',
-        userSelect: 'none',
-      },
-    }),
+    marginTop: 20,
   },
-  contentContainer: {
-    justifyContent: 'space-between',
+  pickerContainer: {
     alignItems: 'center',
+  },
+  picker: {backgroundColor:'green', 
+    height: 120,
+    width: 80,
+  },
+  label: {
+    marginTop: 5,
+    color:'white'
   },
 });
 
-export default memo(Wheel);
+export default TimerPicker;
