@@ -1,6 +1,6 @@
 {
   "name": "txend-react-native-ui-datepicker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Customizable multi-date range datetime picker for React Native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -53,7 +53,7 @@
     "timepicker",
     "time-picker"
   ],
-  "repository": "https://github.com/hamza-gulaiz/txend-range-datepicker",
+  "repository": "https://github.com/hamza-gulraiz/txend-range-datepicker",
   "author": "Hamza Gulraiz <hamza.gulraiz@txend.com>",
   "license": "MIT",
   "bugs": {
