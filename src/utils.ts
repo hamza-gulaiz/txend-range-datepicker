@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 import type { DateType, IDayObject } from './types';
+import moment from 'moment';
+
 
 export const CALENDAR_FORMAT = 'YYYY-MM-DD HH:mm';
 export const DATE_FORMAT = 'YYYY-MM-DD';
@@ -67,6 +69,22 @@ export function getDateWithOffset(offset: number) {
   currentDate.setDate(currentDate.getDate() + offset);
   return currentDate;
 }
+
+
+export const swapTime = (newDateString: moment.MomentInput, currentDateToday: moment.MomentInput) => {
+  const newDate = moment(newDateString);
+  const currentTime = moment(currentDateToday, 'YYYY-MM-DD h:mm');
+  
+  // Set the time from currentTime to newDate
+  newDate.set({
+    hour: currentTime.get('hour'),
+    minute: currentTime.get('minute'),
+    second: currentTime.get('second'),
+  });
+
+  return newDate.format('YYYY-MM-DD h:mm');
+};
+
 
 export const getFormated = (date: DateType) =>
   dayjs(date).format(CALENDAR_FORMAT);

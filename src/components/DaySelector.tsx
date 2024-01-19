@@ -9,7 +9,9 @@ import {
   areDatesOnSameDay,
   getDate,
   getFormated,
+  swapTime,
 } from '../utils';
+import moment from 'moment';
 
 const DaySelector = () => {
   const {
@@ -60,30 +62,33 @@ const DaySelector = () => {
 
   const handleSelectDate = useCallback(
     (date: string) => {
-      const newDate = getDate(date).hour(hour).minute(minute);
+      const newDate = getDate(date).hour(hour).minute(minute+getDate(date).utcOffset());
+      const currentDateToday = moment().format('YYYY-MM-DD h:mm');
+      const newDateString = moment(date).format('YYYY-MM-DD h:mm');
+      const swappedDate = swapTime(newDateString, currentDateToday);
       if (selectedDate === null && selectedDateTo === null) {
-        onSelectDate(getFormated(newDate));
+        onSelectDate(swappedDate);
       } else if (selectedDate != null && selectedDateTo === null) {
         if (newDate.isBefore(selectedDate)) {
-          onSelectDate(getFormated(newDate));
-          onSelectDateTo(getFormated(selectedDate), getFormated(newDate));
+          onSelectDate(swappedDate);
+          onSelectDateTo(selectedDate, swappedDate);
         } else {
-          onSelectDateTo(getFormated(newDate), selectedDate);
+          onSelectDateTo(swappedDate, selectedDate);
         }
       } else if (
         selectedDate != null &&
         selectedDateTo != null &&
         selectedDate !== selectedDateTo
       ) {
-        onSelectDate(getFormated(newDate));
+        onSelectDate(swappedDate);
         onSelectDateTo(null, null);
       } else if (getFormated(selectedDate) === getFormated(selectedDateTo)) {
-        onSelectDate(getFormated(newDate));
+        onSelectDate(swappedDate);
         onSelectDateTo(null, null);
       } else {
       }
     },
-    [onSelectDate, onSelectDateTo, hour,minute, selectedDate, selectedDateTo]
+    [onSelectDate, onSelectDateTo,hour,minute,  selectedDate, selectedDateTo]
   );
 
 
